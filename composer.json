@@ -18,7 +18,8 @@
         "yiisoft/yii2": ">=2.0.4",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "yurkinx/yii2-image": "^1.1"
+        "yurkinx/yii2-image": "^1.1",
+        "justinvoelker/yii2-separatedpager": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

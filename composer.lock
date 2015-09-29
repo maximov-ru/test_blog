@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "86913526e3ede09c3f5f8e4fb35e4d92",
-    "content-hash": "0bdf878b28b5370f56e04566a722350a",
+    "hash": "ae99e6e8475eb19e1bdb595d1ace5788",
+    "content-hash": "4ef5d4bde0f9f7e4ee18ddce8d67aae8",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -316,6 +316,47 @@
                 "html"
             ],
             "time": "2013-11-30 08:25:19"
+        },
+        {
+            "name": "justinvoelker/yii2-separatedpager",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/justinvoelker/yii2-separatedpager.git",
+                "reference": "671a0eb8fcd88d69eb17de74989b9db397dea49d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/justinvoelker/yii2-separatedpager/zipball/671a0eb8fcd88d69eb17de74989b9db397dea49d",
+                "reference": "671a0eb8fcd88d69eb17de74989b9db397dea49d",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "justinvoelker\\separatedpager\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Voelker",
+                    "email": "justin@justinvoelker.com"
+                }
+            ],
+            "description": "A Yii2 LinkPager that displays the first and last pages inline with other pages.",
+            "keywords": [
+                "linkpager",
+                "pagination",
+                "yii2"
+            ],
+            "time": "2015-05-30 05:27:52"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -5,9 +5,11 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Post;
 use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UrlManager;
 
 /**
  * BlogController implements the CRUD actions for Post model.
@@ -30,14 +32,27 @@ class BlogController extends Controller
      * Lists all Post models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($page=1)
     {
+        $page = intval($page);
         $dataProvider = new ActiveDataProvider([
-            'query' => Post::find(),
+            'query' => Post::find()->orderBy('public_from'),
+            'pagination' => array(
+                'pageSize' => 1,
+                'page'=>($page-1),
+                'defaultPageSize'=>1,
+                'forcePageParam' => false,
+                /*'urlManager'=>[
+                    'pattern' => 'blog/page<page:\d+>',
+                    'route' => 'blog/index',
+                    'suffix' => '/'
+                ],*/
+            ),
         ]);
 
+
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -51,7 +66,7 @@ class BlogController extends Controller
         //echo "123";die();
         $model = $this->findModel($slug);
         //var_dump($model->getAttributes());die();
-        return $this->render('view', [
+        return $this->render('postMain', [
             'model' => $model,
         ]);
     }

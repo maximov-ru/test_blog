@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\BaseStringHelper;
 
 /**
  * This is the model class for table "post".
@@ -102,5 +103,11 @@ class Post extends \yii\db\ActiveRecord
     private static function str_to_translit($str)
     {
         return strtr($str, array('а' => 'a', 'б' => 'b', 'в' => 'v', 'г' => 'g', 'д' => 'd', 'е' => 'e', 'ё' => 'e', 'ж' => 'zh', 'з' => 'z', 'и' => 'i', 'й' => 'i', 'к' => 'k', 'л' => 'l', 'м' => 'm', 'н' => 'n', 'о' => 'o', 'п' => 'p', 'р' => 'r', 'с' => 's', 'т' => 't', 'у' => 'u', 'ф' => 'f', 'х' => 'h', 'ц' => 'c', 'ч' => 'ch', 'ш' => 'sh', 'щ' => 'sch', 'ъ' => '', 'ы' => 'y', 'ь' => '', 'э' => 'e', 'ю' => 'u', 'я' => 'ya',' '=>'-',','=>'','.'=>'','?'=>'','!'=>'','/'=>'-','\\'=>'','-','«'=>'','»'=>'','—'=>'','['=>'',']'=>'',':'=>''));
+    }
+
+    public function getPostPreview(){
+        $ret = BaseStringHelper::truncate($this->post,400,'...','utf-8',true);
+        $ret = strip_tags($ret);
+        return $ret;
     }
 }

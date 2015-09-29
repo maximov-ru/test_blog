@@ -43,6 +43,7 @@ return [
             'enablePrettyUrl' => true,
             'cache'=>false,
             'rules' => [
+                'blog/page<page:\d+>' => 'blog/index',
                 'blog/<slug:[a-zA-Z\\-]+>' => 'blog/view',
                 '<controller>/<action>' => '<controller>/<action>'
             ]
