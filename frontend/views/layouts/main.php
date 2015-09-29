@@ -55,7 +55,7 @@ AppAsset::register($this);
                 </div>
             </div>
             <div class="ad col3">
-                <img src="/i/banner.jpg" alt="Banner"/>
+                <img src="/i/test-post-img.jpg" alt="Banner"/>
             </div>
         </div>
     </div>
