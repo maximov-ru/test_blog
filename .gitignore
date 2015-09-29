@@ -1,0 +1,27 @@
+# phpstorm
+.idea
+
+composer.phar
+
+# eclipse like
+.buildpath
+.project
+.settings
+
+# sass
+*.sass-cache
+
+# cache
+Thumbs.db
+*.DS_Store
+*.empty
+
+# sandbox
+# TestController.php
+
+
+#robots and sitemap
+
+vendor
+/frontend/www/web.config
+/vendor/**/.git

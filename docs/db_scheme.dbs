@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="uptown" id="Project_233ed562" html="y" template="Default" database="PostgreSQL" >
+	<comment><![CDATA[uptown estate]]></comment>
+	<schema name="uptown" schemaname="uptown" >
+		<table name="ads" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="estate_type" type="integer" jt="4" >
+				<comment><![CDATA[Тип недвижимости: квартиры, загородная недвижимость или нежилая]]></comment>
+			</column>
+			<column name="price" type="integer" jt="4" >
+				<comment><![CDATA[Цена]]></comment>
+			</column>
+			<column name="total_area" type="float8" jt="6" >
+				<comment><![CDATA[Общая площадь]]></comment>
+			</column>
+			<column name="living_area" type="float8" jt="6" >
+				<comment><![CDATA[Жилая площадь]]></comment>
+			</column>
+			<column name="kitchen_area" type="float8" jt="6" >
+				<comment><![CDATA[Площадь кухни]]></comment>
+			</column>
+			<column name="number_of_rooms" type="integer" jt="4" >
+				<comment><![CDATA[Количество комнат]]></comment>
+			</column>
+			<column name="number_of_balconies" type="integer" jt="4" >
+				<comment><![CDATA[Количество балконов]]></comment>
+			</column>
+			<column name="balconies_area" type="float8" jt="6" >
+				<comment><![CDATA[Площадь балконов]]></comment>
+			</column>
+			<column name="have_photos" type="integer" jt="4" >
+				<comment><![CDATA[Имеются фотографии]]></comment>
+			</column>
+			<column name="floor" type="integer" jt="4" >
+				<comment><![CDATA[Этаж]]></comment>
+			</column>
+			<column name="description" type="text" jt="12" >
+				<comment><![CDATA[Описание]]></comment>
+			</column>
+			<column name="last_floor" type="bool" jt="-7" >
+				<comment><![CDATA[Последний этаж]]></comment>
+			</column>
+			<column name="number_of_lifts" type="integer" jt="4" >
+				<comment><![CDATA[Количество лифтов]]></comment>
+			</column>
+			<column name="transaction_type" type="integer" jt="4" >
+				<comment><![CDATA[Тип сделки: свободная или альтернативная]]></comment>
+			</column>
+			<column name="user_id" type="integer" jt="4" />
+			<column name="numbers_of_wc" type="integer" jt="4" >
+				<comment><![CDATA[Количество санузлов]]></comment>
+			</column>
+			<column name="wc_type" type="integer" jt="4" >
+				<comment><![CDATA[Тип санузлов: совмешенный или раздельный]]></comment>
+			</column>
+			<column name="create_time" type="timestamp" jt="93" />
+			<column name="total_floors" type="integer" jt="4" >
+				<comment><![CDATA[Этажность дома]]></comment>
+			</column>
+			<column name="open_plan" type="bool" jt="-7" >
+				<comment><![CDATA[Свободная планировка]]></comment>
+			</column>
+			<column name="part" type="bool" jt="-7" >
+				<comment><![CDATA[Доля]]></comment>
+			</column>
+			<column name="possible_mortgage" type="bool" jt="-7" >
+				<comment><![CDATA[Возможна ипотека]]></comment>
+			</column>
+			<column name="city" type="integer" jt="4" />
+			<column name="street" type="varchar" length="45" jt="12" >
+				<comment><![CDATA[Улица]]></comment>
+			</column>
+			<column name="house_number" type="integer" jt="4" />
+			<column name="corps" type="varchar" length="10" jt="12" >
+				<comment><![CDATA[Корпус]]></comment>
+			</column>
+			<column name="window_view" type="varchar" length="30" jt="12" >
+				<comment><![CDATA[Вид из окна]]></comment>
+			</column>
+			<column name="telephone" type="varchar" length="17" jt="12" >
+				<comment><![CDATA[Телефон]]></comment>
+			</column>
+			<column name="published" type="bool" jt="-7" >
+				<comment><![CDATA[Опубликовано]]></comment>
+			</column>
+			<index name="pk_ads" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_ads" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<fk name="fk_ads_users" to_schema="uptown" to_table="users" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+		<table name="estate_sheets" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<index name="pk_estate sheet" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="users" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="email" type="varchar" length="70" jt="12" />
+			<column name="role" type="varchar" length="20" jt="12" />
+			<column name="confirm" type="bool" jt="-7" />
+			<index name="pk_users" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+	</schema>
+	<layout id="Layout_1eb4cdd6" name="uptown" show_relation_columns="y" >
+		<entity schema="uptown" name="users" color="aec7ef" x="45" y="45" />
+		<entity schema="uptown" name="estate_sheets" color="aec7ef" x="510" y="45" />
+		<entity schema="uptown" name="ads" color="aec7ef" x="285" y="90" />
+	</layout>
+</project>

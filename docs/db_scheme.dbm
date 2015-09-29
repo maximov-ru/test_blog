@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.8.1" last-position="0,0" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<database name="postgres" encoding="UTF8" lc-collate="C" lc-ctype="C">
+	<role name="postgres"/>
+	<tablespace name="pg_default"/>
+	<comment><![CDATA[default administrative connection database]]></comment>
+</database>
+
+<schema name="public" protected="true" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<schema name="uptown" rect-visible="true" fill-color="#07dc1a">
+	<role name="postgres"/>
+</schema>
+
+<table name="estate_sheets">
+	<schema name="uptown"/>
+	<role name="postgres"/>
+	<position x="50" y="50"/>
+	<column name="id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="pk_estate sheet" type="pk-constr" table="uptown.estate_sheets">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="users">
+	<schema name="uptown"/>
+	<role name="postgres"/>
+	<position x="207.959" y="50"/>
+	<column name="id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="email">
+		<type name="character varying" length="70"/>
+	</column>
+	<column name="role">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="confirm">
+		<type name="boolean"/>
+	</column>
+	<constraint name="pk_users" type="pk-constr" table="uptown.users">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="ads">
+	<schema name="uptown"/>
+	<role name="postgres"/>
+	<position x="448.709" y="50"/>
+	<column name="id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="estate_type">
+		<type name="integer"/>
+		<comment><![CDATA[Тип недвижимости: квартиры, загородная недвижимость или нежилая]]></comment>
+	</column>
+	<column name="price">
+		<type name="integer"/>
+		<comment><![CDATA[Цена]]></comment>
+	</column>
+	<column name="total_area">
+		<type name="double precision"/>
+		<comment><![CDATA[Общая площадь]]></comment>
+	</column>
+	<column name="living_area">
+		<type name="double precision"/>
+		<comment><![CDATA[Жилая площадь]]></comment>
+	</column>
+	<column name="kitchen_area">
+		<type name="double precision"/>
+		<comment><![CDATA[Площадь кухни]]></comment>
+	</column>
+	<column name="number_of_rooms">
+		<type name="integer"/>
+		<comment><![CDATA[Количество комнат]]></comment>
+	</column>
+	<column name="number_of_balconies">
+		<type name="integer"/>
+		<comment><![CDATA[Количество балконов]]></comment>
+	</column>
+	<column name="balconies_area">
+		<type name="double precision"/>
+		<comment><![CDATA[Площадь балконов]]></comment>
+	</column>
+	<column name="have_photos">
+		<type name="integer"/>
+		<comment><![CDATA[Имеются фотографии]]></comment>
+	</column>
+	<column name="floor">
+		<type name="integer"/>
+		<comment><![CDATA[Этаж]]></comment>
+	</column>
+	<column name="description">
+		<type name="text"/>
+		<comment><![CDATA[Описание]]></comment>
+	</column>
+	<column name="last_floor">
+		<type name="boolean"/>
+		<comment><![CDATA[Последний этаж]]></comment>
+	</column>
+	<column name="number_of_lifts">
+		<type name="integer"/>
+		<comment><![CDATA[Количество лифтов]]></comment>
+	</column>
+	<column name="transaction_type">
+		<type name="integer"/>
+		<comment><![CDATA[Тип сделки: свободная или альтернативная]]></comment>
+	</column>
+	<column name="user_id">
+		<type name="integer"/>
+	</column>
+	<column name="numbers_of_wc">
+		<type name="integer"/>
+		<comment><![CDATA[Количество санузлов]]></comment>
+	</column>
+	<column name="wc_type">
+		<type name="integer"/>
+		<comment><![CDATA[Тип санузлов: совмешенный или раздельный]]></comment>
+	</column>
+	<column name="create_time">
+		<type name="timestamp"/>
+	</column>
+	<column name="total_floors">
+		<type name="integer"/>
+		<comment><![CDATA[Этажность дома]]></comment>
+	</column>
+	<column name="open_plan">
+		<type name="boolean"/>
+		<comment><![CDATA[Свободная планировка]]></comment>
+	</column>
+	<column name="part">
+		<type name="boolean"/>
+		<comment><![CDATA[Доля]]></comment>
+	</column>
+	<column name="possible_mortgage">
+		<type name="boolean"/>
+		<comment><![CDATA[Возможна ипотека]]></comment>
+	</column>
+	<column name="city">
+		<type name="integer"/>
+	</column>
+	<column name="street">
+		<type name="character varying" length="45"/>
+		<comment><![CDATA[Улица]]></comment>
+	</column>
+	<column name="house_number">
+		<type name="integer"/>
+	</column>
+	<column name="corps">
+		<type name="character varying" length="10"/>
+		<comment><![CDATA[Корпус]]></comment>
+	</column>
+	<column name="window_view">
+		<type name="character varying" length="30"/>
+		<comment><![CDATA[Вид из окна]]></comment>
+	</column>
+	<column name="telephone">
+		<type name="character varying" length="17"/>
+		<comment><![CDATA[Телефон]]></comment>
+	</column>
+	<column name="published">
+		<type name="boolean"/>
+		<comment><![CDATA[Опубликовано]]></comment>
+	</column>
+	<constraint name="pk_ads" type="pk-constr" table="uptown.ads">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_ads" table="uptown.ads"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<table name="transactions">
+	<schema name="uptown"/>
+	<role name="postgres"/>
+	<position x="88" y="165"/>
+	<column name="id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="integer"/>
+		<comment><![CDATA[Пользователь]]></comment>
+	</column>
+	<column name="create_timestamp" not-null="true">
+		<type name="timestamp"/>
+		<comment><![CDATA[Время операции]]></comment>
+	</column>
+	<column name="amount">
+		<type name="float8"/>
+	</column>
+	<constraint name="id_trans" type="pk-constr" table="uptown.transactions">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="fk_ads_users" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="uptown.users" table="uptown.ads">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_ads_users" type="relfk"
+	 custom-color="#ab1b58"
+	 src-table="uptown.ads"
+	 dst-table="uptown.users"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
