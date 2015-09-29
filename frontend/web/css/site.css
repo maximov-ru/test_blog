@@ -104,15 +104,15 @@ footer .copy{
     color: #999;
 }
 /*content/grid*/
-.content {
-    margin: -50px 0 -85px;
-}
 h1.blog-name {
     padding:65px 0 50px;
 }
 .grid {
     max-width: 970px;
     margin: 0 auto;
+}
+.content.grid {
+    margin: -50px auto -85px;
 }
 .row {
     clear: both;
