@@ -29,7 +29,7 @@ AppAsset::register($this);
             <div class="row">
                 <div class="col11">
                     <a class="logo" href="/">
-                        <img src="/i/logo.png" alt="Blog"/>
+                        <img src="/i/logo-lg.png" alt="Blog"/>
                     </a>
                 </div>
                 <div class="col1 rss">RSS</div>
@@ -63,7 +63,7 @@ AppAsset::register($this);
         <div class="grid">
             <div class="row">
                 <div class="col3">
-                    <img class="logo" src="/i/logo.png" alt="Blog"/>
+                    <img class="logo" src="/i/logo-lg.png" alt="Blog"/>
                 </div>
                 <div class="col9 copy">&copy; 2008–2015 SEMrush. All rights reserved.</div>
             </div>

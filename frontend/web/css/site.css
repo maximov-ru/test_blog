@@ -58,6 +58,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /*common*/
 html,
 body {
+    font-family: "Ubuntu";
     height: 100%;
     font-size: 14px;
     color: #333;
