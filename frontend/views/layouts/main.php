@@ -36,7 +36,7 @@ AppAsset::register($this);
             </div>
         </div>
     </header>
-    <div class="content">
+    <div class="content grid">
         <h1 class="blog-name">Blog</h1>
         <div class="row">
             <div class="post-list col9">
