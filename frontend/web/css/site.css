@@ -257,3 +257,9 @@ h1.blog-name {
     margin-bottom: 100px;
     display: inline-block;
 }
+.post-content img {
+    margin-right: 10px;
+}
+.post-short-text {
+    line-height: 1.3em;
+}

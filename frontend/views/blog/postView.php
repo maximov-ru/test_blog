@@ -5,6 +5,13 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Post */
+$this->title = $model->title;
+$this->registerMetaTag(['name'=>'description','content' => $model->desc]);
+$this->registerMetaTag(['name'=>'keywords','content' => $model->keywords]);
+$this->registerMetaTag(['property'=>'og:type','content' => 'article']);
+$this->registerMetaTag(['property'=>'og:url','content' => 'http://test.danechka.com/blog/'.$model->slug.'/']);
+$this->registerMetaTag(['property'=>'og:title','content' => $model->title]);
+$this->registerMetaTag(['property'=>'og:description','content' => $model->desc]);
 
 ?>
 <h1 class="blog-name"><?= Html::encode($model->title) ?></h1>

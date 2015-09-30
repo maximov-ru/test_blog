@@ -33,6 +33,7 @@ class m130524_201442_init extends Migration
             'image_big' => Schema::TYPE_STRING . '(45) DEFAULT NULL',
             'image_medium' => Schema::TYPE_STRING . '(45) DEFAULT NULL',
             'post' => 'logtext CHARACTER SET utf8',
+            'keywords' => Schema::TYPE_STRING . '(255) SET utf8 DEFAULT NULL',
             'owner_id' => Schema::TYPE_INTEGER . ' NOT NULL',
             'public_from' =>  'datetime DEFAULT NULL',
             'create_time' => 'datetime DEFAULT NULL',

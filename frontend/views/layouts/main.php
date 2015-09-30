@@ -17,14 +17,18 @@ AppAsset::register($this);
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="<?= Yii::$app->charset ?>">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.5/waypoints.min.js"></script>
+    <script src="/js/animation.js"></script>
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu" />
+    <link rel="stylesheet" type="text/css" href="/css/animate.css" />
     <link rel="stylesheet" type="text/css" href="/css/site.css" />
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-
 </head>
 <body>
+<?php $this->beginBody() ?>
 <div class="container">
     <header>
         <div class="grid logo">
@@ -58,3 +62,4 @@ AppAsset::register($this);
 </div>
 </body>
 </html>
+<?php $this->endPage() ?>

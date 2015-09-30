@@ -9,6 +9,7 @@ use \justinvoelker\separatedpager\LinkPager;
 
 $this->title = 'SEMrush Blog';
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerMetaTag(['name'=>'description','content' => 'SEMrush Blog, blog about anything']);
 ?>
 <h1 class="blog-name"><?= Html::encode($this->title) ?></h1>
 <div class="row main">

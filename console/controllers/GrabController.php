@@ -9,12 +9,12 @@ class GrabController extends \yii\console\Controller
 {
     public function actionIndex()
     {
-        $ru_repl = ['сегодня', 'вчера', 'января', 'февряля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'декабря', ' в '];
-        $en_repl = ['today', 'yesterday', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December', ' '];
+        $ru_repl = ['сегодня в ', 'вчера в ', 'января', 'февряля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'декабря', ' в '];
+        $en_repl = ['today ', 'yesterday ', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December', ' 2015, '];
         $avatar_folder_path = \Yii::getAlias('@frontwebroot') . '/avatars';
         $images_folder_path = \Yii::getAlias('@frontwebroot') . '/post_images';
 
-        $cont = file_get_contents('http://geektimes.ru/page14/');
+        $cont = file_get_contents('http://geektimes.ru/page2/');
         preg_match_all('|<a\shref\=\"(.*?)\"\sclass\=\"post_title\">|im', $cont, $matches);
         print_r($matches);
         $links = $matches[1];
@@ -26,6 +26,12 @@ class GrabController extends \yii\console\Controller
             $p_date = str_replace($ru_repl, $en_repl, $p_date);
             preg_match_all('|<span\sclass\=\"post_title\">(.*?)<\/span>|im', $cont, $matches);
             $title = $matches[1][0];
+            //meta name="keywords" content="" />
+            $keywords = '';
+            preg_match_all('|<meta\sname\=\"keywords\"\scontent\=\"(.*?)\"\s\/>|im', $cont, $matches);
+            if (isset($matches[1][0])) {
+                $keywords = $matches[1][0];
+            }
             preg_match_all('|<div\sclass=\"content\shtml_format">(.*?)<div\sclass\=\"clear\"><\/div>\s+<\/div>\s+<ul\sclass\=\"tags\">|ims', $cont, $matches);
             $content = $matches[1][0];
             preg_match_all('|<meta\sproperty\=\"og\:image\"\s+content\=\"(.*?)\"\s\/>|im', $cont, $matches);
@@ -69,6 +75,7 @@ class GrabController extends \yii\console\Controller
             $post->owner_id = $user->getId();
             $post->post = $content;
             $post->title = $title;
+            $post->keywords = $keywords;
             $post->create_time = date('Y-m-d H:i:s', strtotime($p_date));
             $post->update_time = date('Y-m-d H:i:s', strtotime($p_date));
             $post->public_from = date('Y-m-d H:i:s', strtotime($p_date));

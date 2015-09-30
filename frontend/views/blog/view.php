@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 
 ?>
 
-<div class="post row">
+<div class="post row animation_f">
     <div class="post-date col12"><?= Html::encode(date('F j, Y',strtotime($model->public_from))) ?></div>
     <div class="post-name col12">
         <a href="<?= '/blog/'.$model->slug;?>" class="h2"><?= Html::encode($model->title) ?></a>
