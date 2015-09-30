@@ -7,14 +7,19 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Post */
 
 ?>
-<div class="post-view">
 
-
-    <div class="public_date"><?= Html::encode(date('F j, Y',strtotime($model->public_from))) ?></div>
-    <div class="post_title"><h1><?= Html::encode($model->title) ?></h1><span class="post_by">by <?= $model->owner->username?></span></div>
-    <div class="post_image"><img src="<?= \Yii::getAlias('@web').'/post_images/'.$model->image_medium?>" /></div>
-    <div class="post_text"><?= $model->postPreview?></div>
-
+<div class="post row">
+    <div class="post-date col12"><?= Html::encode(date('F j, Y',strtotime($model->public_from))) ?></div>
+    <div class="post-name col12">
+        <a href="<?= '/blog/'.$model->slug;?>" class="h2"><?= Html::encode($model->title) ?></a>
+        <div class="post-author">by <?= $model->owner->username?></div>
+    </div>
+    <div class="post-content">
+        <div class="post-img col4">
+            <img src="<?= \Yii::getAlias('@web').'/post_images/'.$model->image_medium?>" alt="Post #1"/>
+        </div>
+        <div class="post-short-text col8">
+            <?= $model->postPreview?>
+        </div>
+    </div>
 </div>
-
-<hr />

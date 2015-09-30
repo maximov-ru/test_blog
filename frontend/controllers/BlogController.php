@@ -6,10 +6,13 @@ use Yii;
 use common\models\Post;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
+use yii\helpers\StringHelper;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UrlManager;
+use Zelenin\yii\extensions\Rss\RssView;
 
 /**
  * BlogController implements the CRUD actions for Post model.
@@ -32,15 +35,15 @@ class BlogController extends Controller
      * Lists all Post models.
      * @return mixed
      */
-    public function actionIndex($page=1)
+    public function actionIndex($page = 1)
     {
         $page = intval($page);
         $dataProvider = new ActiveDataProvider([
-            'query' => Post::find()->orderBy('public_from'),
+            'query' => Post::find()->with(['owner'])->where('public_from <= NOW()')->orderBy('public_from DESC'),
             'pagination' => array(
-                'pageSize' => 1,
-                'page'=>($page-1),
-                'defaultPageSize'=>1,
+                'pageSize' => 5,
+                'page' => ($page - 1),
+                'defaultPageSize' => 5,
                 'forcePageParam' => false,
                 /*'urlManager'=>[
                     'pattern' => 'blog/page<page:\d+>',
@@ -66,7 +69,7 @@ class BlogController extends Controller
         //echo "123";die();
         $model = $this->findModel($slug);
         //var_dump($model->getAttributes());die();
-        return $this->render('postMain', [
+        return $this->render('postView', [
             'model' => $model,
         ]);
     }
@@ -108,6 +111,53 @@ class BlogController extends Controller
         }
     }
 
+    public function actionRss()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Post::find()->with(['owner'])->where('public_from <= NOW()')->orderBy('public_from DESC'),
+            'pagination' => [
+                'pageSize' => 10
+            ],
+        ]);
+
+        $response = Yii::$app->getResponse();
+        $headers = $response->getHeaders();
+
+        $headers->set('Content-Type', 'application/rss+xml; charset=utf-8');
+
+        $response->content = RssView::widget([
+            'dataProvider' => $dataProvider,
+            'channel' => [
+                'title' => 'SEMrush Blog',
+                'link' => Url::toRoute('/', true),
+                'description' => 'SEMrush Blog',
+                'language' => 'ru'
+            ],
+            'items' => [
+                'title' => function ($model, $widget) {
+                    return $model->title;
+                },
+                'description' => function ($model, $widget) {
+                    return StringHelper::truncateWords($model->postPreview, 50);
+                },
+                'link' => function ($model, $widget) {
+                    return 'http://test.danechka.com/blog/' . $model->slug;
+                },
+                'author' => function ($model, $widget) {
+                    return $model->owner->username;
+                },
+                'guid' => function ($model, $widget) {
+                    $date = \DateTime::createFromFormat('Y-m-d H:i:s', $model->public_from);
+                    return 'http://test.danechka.com/blog/' . $model->slug . ' ' . $date->format(DATE_RSS);
+                },
+                'pubDate' => function ($model, $widget) {
+                    $date = \DateTime::createFromFormat('Y-m-d H:i:s', $model->public_from);
+                    return $date->format(DATE_RSS);
+                }
+            ]
+        ]);
+    }
+
     /**
      * Deletes an existing Post model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -130,7 +180,7 @@ class BlogController extends Controller
      */
     protected function findModel($slug)
     {
-        if (($model = Post::findOne(['slug'=>$slug])) !== null) {
+        if (($model = Post::findOne(['slug' => $slug])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

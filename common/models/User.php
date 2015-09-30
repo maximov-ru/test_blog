@@ -116,7 +116,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         $parts = explode('_', $token);
-        $timestamp = (int) end($parts);
+        $timestamp = (int)end($parts);
         return $timestamp + $expire >= time();
     }
 
@@ -192,9 +192,9 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getUserByUsername($username)
     {
         if (!isset(self::$usernameIdMap[$username])) {
-            $user = User::findOne(['username'=>$username]);
+            $user = User::findOne(['username' => $username]);
             self::$usernameIdMap[$username] = null;
-            if($user){
+            if ($user) {
                 self::$idMap[$user->getId()] = $user;
                 self::$usernameIdMap[$username] = $user->getId();
             }

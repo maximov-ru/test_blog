@@ -15,7 +15,8 @@ return [
     'modules'=>[
         'gii' => [
             'class' => 'yii\gii\Module',
-            'allowedIPs' => ['*'] // adjust this to your needs
+            'allowedIPs' => ['*'], // adjust this to your needs
+
         ],
         //'debug'=>'yii\debug\Module'
     ],
@@ -44,7 +45,10 @@ return [
             'cache'=>false,
             'rules' => [
                 'blog/page<page:\d+>' => 'blog/index',
-                'blog/<slug:[a-zA-Z\\-]+>' => 'blog/view',
+                '/' => 'blog/index',
+                '/blog/rss'=>'blog/rss',
+                'blog/<slug:[0-9a-zA-Z\\-\\+]+>' => 'blog/view',
+
                 '<controller>/<action>' => '<controller>/<action>'
             ]
         ],

@@ -41,7 +41,7 @@ class Post extends \yii\db\ActiveRecord
             [['owner_id'], 'integer'],
             [['post'], 'string'],
             [['public_from', 'create_time', 'update_time'], 'safe'],
-            [['image_big','image_medium'], 'string', 'max' => 45],
+            [['image_big', 'image_medium'], 'string', 'max' => 45],
             [['title', 'slug'], 'string', 'max' => 255],
             [['slug'], 'unique']
         ];
@@ -78,7 +78,7 @@ class Post extends \yii\db\ActiveRecord
     {
         echo "before save";
         if (parent::beforeSave($insert)) {
-            if($insert)
+            if ($insert)
                 $this->generateSlug();
             return true;
         } else {
@@ -86,27 +86,35 @@ class Post extends \yii\db\ActiveRecord
         }
     }
 
-    private function generateSlug(){
-        $slug = self::str_to_translit(mb_strtolower($this->title,'utf-8'));
+    private function generateSlug()
+    {
+        $slug = self::str_to_translit(mb_strtolower($this->title, 'utf-8'));
         echo "slg:$slug";
+        if (strpos($slug, 'page') === 0) {
+            $slug = '-page' . substr($slug, 4);
+        }
         $i = 0;
-        do{
-            $post = Post::findOne(['slug'=>($slug.($i? '_'.$i : ''))]);
-            if($post){
+        do {
+            $post = Post::findOne(['slug' => ($slug . ($i ? '_' . $i : ''))]);
+            if ($post) {
                 $i++;
             }
-        }while($post);
-        echo "set ".$slug;
-        $this->slug = $slug.($i? '_'.$i : '');
+        } while ($post);
+        echo "set " . $slug;
+        $this->slug = $slug . ($i ? '_' . $i : '');
     }
 
     private static function str_to_translit($str)
     {
-        return strtr($str, array('а' => 'a', 'б' => 'b', 'в' => 'v', 'г' => 'g', 'д' => 'd', 'е' => 'e', 'ё' => 'e', 'ж' => 'zh', 'з' => 'z', 'и' => 'i', 'й' => 'i', 'к' => 'k', 'л' => 'l', 'м' => 'm', 'н' => 'n', 'о' => 'o', 'п' => 'p', 'р' => 'r', 'с' => 's', 'т' => 't', 'у' => 'u', 'ф' => 'f', 'х' => 'h', 'ц' => 'c', 'ч' => 'ch', 'ш' => 'sh', 'щ' => 'sch', 'ъ' => '', 'ы' => 'y', 'ь' => '', 'э' => 'e', 'ю' => 'u', 'я' => 'ya',' '=>'-',','=>'','.'=>'','?'=>'','!'=>'','/'=>'-','\\'=>'','-','«'=>'','»'=>'','—'=>'','['=>'',']'=>'',':'=>''));
+        $ret = strtr($str, array('а' => 'a', 'б' => 'b', 'в' => 'v', 'г' => 'g', 'д' => 'd', 'е' => 'e', 'ё' => 'e', 'ж' => 'zh', 'з' => 'z', 'и' => 'i', 'й' => 'i', 'к' => 'k', 'л' => 'l', 'м' => 'm', 'н' => 'n', 'о' => 'o', 'п' => 'p', 'р' => 'r', 'с' => 's', 'т' => 't', 'у' => 'u', 'ф' => 'f', 'х' => 'h', 'ц' => 'c', 'ч' => 'ch', 'ш' => 'sh', 'щ' => 'sch', 'ъ' => '', 'ы' => 'y', 'ь' => '', 'э' => 'e', 'ю' => 'u', 'я' => 'ya', ' ' => '-', ',' => '', '.' => '', '?' => '', '!' => '', '/' => '-', '\\' => '', '-', '«' => '', '»' => '', '—' => '', '[' => '', ']' => '', ':' => '', '&' => '-', '–' => '', '+' => '', '(' => '', ')' => ''));
+        $pattern = '/([^0-9A-Za-z\\-]+)/i';
+        $replacement = '';
+        return preg_replace($pattern, $replacement, $ret);
     }
 
-    public function getPostPreview(){
-        $ret = BaseStringHelper::truncate($this->post,400,'...','utf-8',true);
+    public function getPostPreview()
+    {
+        $ret = BaseStringHelper::truncate($this->post, 400, '...', 'utf-8', true);
         $ret = strip_tags($ret);
         return $ret;
     }
